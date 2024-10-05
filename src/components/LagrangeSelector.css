@@ -1,0 +1,41 @@
+.lagrange-selector-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 300px;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    z-index: 1000; /* Ensure it appears above other elements */
+  }
+  
+  .lagrange-selector-container:hover {
+    opacity: 1;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .lagrange-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .lagrange-buttons button {
+    width: 100%;
+  }

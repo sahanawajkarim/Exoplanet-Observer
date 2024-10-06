@@ -36,40 +36,40 @@ const ExoplanetVisualizer = ({ starData, onPlanetSelect }) => {
     calculateSNR();
   }, [diameter, starData]);
 
-  return (
+return (
     <div className="exoplanet-visualizer">
-      <h2>Exoplanet Visualizer</h2>
-      <label>
-        Telescope Diameter (m):
-        <input
-          type="range"
-          min="5"
-          max="15"
-          value={diameter}
-          onChange={handleSliderChange}
-        />
-        {diameter} m
-      </label>
-      <div className="results">
-        <h3>Characterizable Exoplanets (SNR {'>'} 5):</h3>
-        <ul>
-          {characterizablePlanets.length > 0 ? (
-            characterizablePlanets.map((item, index) => (
-              <li
-                key={index}
-                onClick={() => onPlanetSelect(item.planet.name)} 
-              >
-                {item.planet.name} orbiting {item.star.name} (SNR: {item.SNR.toFixed(2)}) 
-                - {item.planet.habitable_zone ? "Habitable" : "Not Habitable"}
-              </li>
-            ))
-          ) : (
-            <li>No characterizable exoplanets found.</li>
-          )}
-        </ul>
-      </div>
+        <h2>Exoplanet Visualizer</h2>
+        <label>
+            Telescope Diameter (m):
+            <input
+                type="range"
+                min="5"
+                max="15"
+                value={diameter}
+                onChange={handleSliderChange}
+            />
+            {diameter} m
+        </label>
+        <div className="results">
+            <h3>Characterizable Exoplanets (SNR {'>'} 5):</h3>
+            <ul className="scrollable-list">
+                {characterizablePlanets.length > 0 ? (
+                    characterizablePlanets.map((item, index) => (
+                        <li
+                            key={index}
+                            onClick={() => onPlanetSelect(item.planet.name)} 
+                        >
+                            {item.planet.name} orbiting {item.star.name} (SNR: {item.SNR.toFixed(2)}) 
+                            - {item.planet.habitable_zone ? "Habitable" : "Not Habitable"}
+                        </li>
+                    ))
+                ) : (
+                    <li>No characterizable exoplanets found.</li>
+                )}
+            </ul>
+        </div>
     </div>
-  );
+);
 };
 
 export default ExoplanetVisualizer;

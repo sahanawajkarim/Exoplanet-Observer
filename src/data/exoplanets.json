@@ -1,741 +1,283 @@
 {
     "galaxy": {
-        "center_x": 0,
-        "center_y": 0,
-        "center_z": 0,
-        "rotation_speed": 0.005
+      "center_x": 0,
+      "center_y": 0,
+      "center_z": 0,
+      "rotation_speed": 0.005
     },
     "starSystems": [
-        {
-            "name": "Kepler-186",
-            "sy_dist": 500.0,
-            "ra": 30.0,
-            "dec": 10.0,
-            "st_teff": 5800,
-            "st_lum": 0.5,
-            "distance_from_center": 100,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "Kepler-186f",
-                    "semi_major_axis": 0.41,
-                    "eccentricity": 0.1,
-                    "orbital_period": 130.0,
-                    "inclination": 0.0,
-                    "habitable_zone": true,
-                    "radius": 1.1,
-                    "angular_separation": 0,
-                    "texture": "Earth.png"
-                },
-                {
-                    "name": "Kepler-186b",
-                    "semi_major_axis": 0.36,
-                    "eccentricity": 0.2,
-                    "orbital_period": 130.0,
-                    "inclination": 10.0,
-                    "habitable_zone": false,
-                    "radius": 0.7,
-                    "angular_separation": 30,
-                    "texture": null
-                }
-            ]
-        },
-        {
-            "name": "TRAPPIST-1",
-            "sy_dist": 40.0,
-            "ra": 45.0,
-            "dec": -15.0,
-            "st_teff": 2500,
-            "st_lum": 0.08,
-            "distance_from_center": 150,
-            "rotation_speed": 0.015,
-            "planets": [
-                {
-                    "name": "TRAPPIST-1b",
-                    "semi_major_axis": 0.011,
-                    "eccentricity": 0.0,
-                    "orbital_period": 1.5,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.1,
-                    "angular_separation": 15,
-                    "texture": "Mars.png"
-                },
-                {
-                    "name": "TRAPPIST-1c",
-                    "semi_major_axis": 0.021,
-                    "eccentricity": 0.01,
-                    "orbital_period": 2.4,
-                    "inclination": 5.0,
-                    "habitable_zone": true,
-                    "radius": 1.2,
-                    "angular_separation": 45,
-                    "texture": null
-                },
-                {
-                    "name": "TRAPPIST-1d",
-                    "semi_major_axis": 0.028,
-                    "eccentricity": 0.01,
-                    "orbital_period": 4.0,
-                    "inclination": 10.0,
-                    "habitable_zone": true,
-                    "radius": 0.77,
-                    "angular_separation": 60,
-                    "texture": null
-                }
-            ]
-        },
-        {
-            "name": "HD 40307",
-            "sy_dist": 40.0,
-            "ra": 120.0,
-            "dec": 15.0,
-            "st_teff": 4850,
-            "st_lum": 0.3,
-            "distance_from_center": 200,
-            "rotation_speed": 0.02,
-            "planets": [
-                {
-                    "name": "HD 40307b",
-                    "semi_major_axis": 0.06,
-                    "eccentricity": 0.2,
-                    "orbital_period": 19.0,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.6,
-                    "angular_separation": 0,
-                    "texture": "Venus.png"
-                },
-                {
-                    "name": "HD 40307c",
-                    "semi_major_axis": 0.11,
-                    "eccentricity": 0.05,
-                    "orbital_period": 35.0,
-                    "inclination": 5.0,
-                    "habitable_zone": true,
-                    "radius": 1.2,
-                    "angular_separation": 30,
-                    "texture": null
-                },
-                {
-                    "name": "HD 40307d",
-                    "semi_major_axis": 0.19,
-                    "eccentricity": 0.02,
-                    "orbital_period": 52.0,
-                    "inclination": 10.0,
-                    "habitable_zone": true,
-                    "radius": 1.0,
-                    "angular_separation": 45,
-                    "texture": null
-                }
-            ]
-        },
-        {
-            "name": "Kepler-22",
-            "sy_dist": 600.0,
-            "ra": 60.0,
-            "dec": -5.0,
-            "st_teff": 5600,
-            "st_lum": 0.5,
-            "distance_from_center": 100,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "Kepler-22b",
-                    "semi_major_axis": 0.84,
-                    "eccentricity": 0.01,
-                    "orbital_period": 290.0,
-                    "inclination": 0.0,
-                    "habitable_zone": true,
-                    "radius": 2.4,
-                    "angular_separation": 0,
-                    "texture": "Earth.png"
-                },
-                {
-                    "name": "Kepler-22c",
-                    "semi_major_axis": 1.0,
-                    "eccentricity": 0.04,
-                    "orbital_period": 400.0,
-                    "inclination": 5.0,
-                    "habitable_zone": false,
-                    "radius": 1.8,
-                    "angular_separation": 30,
-                    "texture": null
-                }
-            ]
-        },
-        {
-            "name": "HD 189733",
-            "sy_dist": 60.0,
-            "ra": 210.0,
-            "dec": 10.0,
-            "st_teff": 6000,
-            "st_lum": 0.8,
-            "distance_from_center": 150,
-            "rotation_speed": 0.015,
-            "planets": [
-                {
-                    "name": "HD 189733b",
-                    "semi_major_axis": 0.03,
-                    "eccentricity": 0.1,
-                    "orbital_period": 2.2,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.14,
-                    "angular_separation": 0,
-                    "texture": "Venus.png"
-                }
-            ]
-        },
-        {
-            "name": "WASP-12",
-            "sy_dist": 20.0,
-            "ra": 220.0,
-            "dec": 20.0,
-            "st_teff": 6200,
-            "st_lum": 1.5,
-            "distance_from_center": 200,
-            "rotation_speed": 0.02,
-            "planets": [
-                {
-                    "name": "WASP-12b",
-                    "semi_major_axis": 0.022,
-                    "eccentricity": 0.3,
-                    "orbital_period": 1.1,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.79,
-                    "angular_separation": 0,
-                    "texture": "Jupiter.png"
-                }
-            ]
-        },
-        {
-            "name": "LHS 1140",
-            "sy_dist": 40.0,
-            "ra": 245.0,
-            "dec": -10.0,
-            "st_teff": 3500,
-            "st_lum": 0.1,
-            "distance_from_center": 150,
-            "rotation_speed": 0.015,
-            "planets": [
-                {
-                    "name": "LHS 1140b",
-                    "semi_major_axis": 0.04,
-                    "eccentricity": 0.0,
-                    "orbital_period": 24.0,
-                    "inclination": 0.0,
-                    "habitable_zone": true,
-                    "radius": 1.4,
-                    "angular_separation": 0,
-                    "texture": "Earth.png"
-                },
-                {
-                    "name": "LHS 1140c",
-                    "semi_major_axis": 0.06,
-                    "eccentricity": 0.05,
-                    "orbital_period": 45.0,
-                    "inclination": 5.0,
-                    "habitable_zone": true,
-                    "radius": 1.5,
-                    "angular_separation": 30,
-                    "texture": null
-                }
-            ]
-        },
-        {
-            "name": "GJ 667",
-            "sy_dist": 60.0,
-            "ra": 300.0,
-            "dec": 15.0,
-            "st_teff": 4000,
-            "st_lum": 0.5,
-            "distance_from_center": 100,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "GJ 667Cc",
-                    "semi_major_axis": 0.12,
-                    "eccentricity": 0.04,
-                    "orbital_period": 28.0,
-                    "inclination": 0.0,
-                    "habitable_zone": true,
-                    "radius": 1.5,
-                    "angular_separation": 0,
-                    "texture": "Earth.png"
-                }
-            ]
-        },
-        {
-            "name": "HD 21749",
-            "sy_dist": 30.0,
-            "ra": 40.0,
-            "dec": 30.0,
-            "st_teff": 3000,
-            "st_lum": 0.1,
-            "distance_from_center": 150,
-            "rotation_speed": 0.02,
-            "planets": [
-                {
-                    "name": "HD 21749b",
-                    "semi_major_axis": 0.04,
-                    "eccentricity": 0.02,
-                    "orbital_period": 8.0,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.2,
-                    "angular_separation": 0,
-                    "texture": "Venus.png"
-                },
-                {
-                    "name": "HD 21749c",
-                    "semi_major_axis": 0.05,
-                    "eccentricity": 0.01,
-                    "orbital_period": 13.0,
-                    "inclination": 5.0,
-                    "habitable_zone": true,
-                    "radius": 1.6,
-                    "angular_separation": 30,
-                    "texture": null
-                }
-            ]
-        },
-        {
-            "name": "K2-72",
-            "sy_dist": 100.0,
-            "ra": 60.0,
-            "dec": -20.0,
-            "st_teff": 5200,
-            "st_lum": 0.9,
-            "distance_from_center": 100,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "K2-72c",
-                    "semi_major_axis": 0.19,
-                    "eccentricity": 0.03,
-                    "orbital_period": 20.0,
-                    "inclination": 0.0,
-                    "habitable_zone": true,
-                    "radius": 1.1,
-                    "angular_separation": 0,
-                    "texture": "Earth.png"
-                },
-                {
-                    "name": "K2-72b",
-                    "semi_major_axis": 0.07,
-                    "eccentricity": 0.02,
-                    "orbital_period": 10.0,
-                    "inclination": 5.0,
-                    "habitable_zone": false,
-                    "radius": 1.3,
-                    "angular_separation": 30,
-                    "texture": null
-                }
-            ]
-        },
-        {
-            "name": "WASP-39",
-            "sy_dist": 40.0,
-            "ra": 180.0,
-            "dec": 10.0,
-            "st_teff": 5700,
-            "st_lum": 1.0,
-            "distance_from_center": 150,
-            "rotation_speed": 0.02,
-            "planets": [
-                {
-                    "name": "WASP-39b",
-                    "semi_major_axis": 0.04,
-                    "eccentricity": 0.1,
-                    "orbital_period": 6.0,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.3,
-                    "angular_separation": 0,
-                    "texture": "Jupiter.png"
-                }
-            ]
-        },
-        {
-            "name": "WASP-121",
-            "sy_dist": 40.0,
-            "ra": 200.0,
-            "dec": -10.0,
-            "st_teff": 6000,
-            "st_lum": 1.4,
-            "distance_from_center": 150,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "WASP-121b",
-                    "semi_major_axis": 0.025,
-                    "eccentricity": 0.03,
-                    "orbital_period": 1.3,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.9,
-                    "angular_separation": 0,
-                    "texture": "Jupiter.png"
-                }
-            ]
-        },
-        {
-            "name": "WASP-107",
-            "sy_dist": 60.0,
-            "ra": 220.0,
-            "dec": 5.0,
-            "st_teff": 5900,
-            "st_lum": 1.1,
-            "distance_from_center": 100,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "WASP-107b",
-                    "semi_major_axis": 0.047,
-                    "eccentricity": 0.01,
-                    "orbital_period": 6.0,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 0.9,
-                    "angular_separation": 0,
-                    "texture": "Jupiter.png"
-                }
-            ]
-        },
-        {
-            "name": "GJ 3470",
-            "sy_dist": 100.0,
-            "ra": 240.0,
-            "dec": 15.0,
-            "st_teff": 4000,
-            "st_lum": 0.3,
-            "distance_from_center": 150,
-            "rotation_speed": 0.02,
-            "planets": [
-                {
-                    "name": "GJ 3470b",
-                    "semi_major_axis": 0.05,
-                    "eccentricity": 0.04,
-                    "orbital_period": 6.0,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.4,
-                    "angular_separation": 0,
-                    "texture": "Venus.png"
-                }
-            ]
-        },
-        {
-            "name": "LHS 1723",
-            "sy_dist": 30.0,
-            "ra": 280.0,
-            "dec": -5.0,
-            "st_teff": 3500,
-            "st_lum": 0.05,
-            "distance_from_center": 100,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "LHS 1723b",
-                    "semi_major_axis": 0.1,
-                    "eccentricity": 0.02,
-                    "orbital_period": 13.0,
-                    "inclination": 0.0,
-                    "habitable_zone": true,
-                    "radius": 1.2,
-                    "angular_separation": 0,
-                    "texture": "Earth.png"
-                }
-            ]
-        },
-        {
-            "name": "HD 97658",
-            "sy_dist": 40.0,
-            "ra": 100.0,
-            "dec": -10.0,
-            "st_teff": 5100,
-            "st_lum": 0.6,
-            "distance_from_center": 150,
-            "rotation_speed": 0.02,
-            "planets": [
-                {
-                    "name": "HD 97658b",
-                    "semi_major_axis": 0.04,
-                    "eccentricity": 0.05,
-                    "orbital_period": 9.5,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.5,
-                    "angular_separation": 0,
-                    "texture": "Venus.png"
-                }
-            ]
-        },
-        {
-            "name": "K2-136",
-            "sy_dist": 80.0,
-            "ra": 90.0,
-            "dec": -20.0,
-            "st_teff": 6000,
-            "st_lum": 1.2,
-            "distance_from_center": 150,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "K2-136b",
-                    "semi_major_axis": 0.03,
-                    "eccentricity": 0.02,
-                    "orbital_period": 4.0,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.0,
-                    "angular_separation": 0,
-                    "texture": "Earth.png"
-                }
-            ]
-        },
-        {
-            "name": "K2-155",
-            "sy_dist": 60.0,
-            "ra": 270.0,
-            "dec": 20.0,
-            "st_teff": 5000,
-            "st_lum": 0.6,
-            "distance_from_center": 100,
-            "rotation_speed": 0.02,
-            "planets": [
-                {
-                    "name": "K2-155b",
-                    "semi_major_axis": 0.15,
-                    "eccentricity": 0.03,
-                    "orbital_period": 15.0,
-                    "inclination": 0.0,
-                    "habitable_zone": true,
-                    "radius": 1.1,
-                    "angular_separation": 0,
-                    "texture": "Mars.png"
-                }
-            ]
-        },
-        {
-            "name": "GJ 1061",
-            "sy_dist": 50.0,
-            "ra": 150.0,
-            "dec": -25.0,
-            "st_teff": 3500,
-            "st_lum": 0.07,
-            "distance_from_center": 100,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "GJ 1061b",
-                    "semi_major_axis": 0.12,
-                    "eccentricity": 0.02,
-                    "orbital_period": 10.0,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 0.8,
-                    "angular_separation": 0,
-                    "texture": "Venus.png"
-                }
-            ]
-        },
-        {
-            "name": "K2-138",
-            "sy_dist": 70.0,
-            "ra": 60.0,
-            "dec": 5.0,
-            "st_teff": 4900,
-            "st_lum": 0.9,
-            "distance_from_center": 150,
-            "rotation_speed": 0.02,
-            "planets": [
-                {
-                    "name": "K2-138c",
-                    "semi_major_axis": 0.2,
-                    "eccentricity": 0.05,
-                    "orbital_period": 30.0,
-                    "inclination": 10.0,
-                    "habitable_zone": true,
-                    "radius": 1.5,
-                    "angular_separation": 0,
-                    "texture": "Earth.png"
-                },
-                {
-                    "name": "K2-138b",
-                    "semi_major_axis": 0.1,
-                    "eccentricity": 0.04,
-                    "orbital_period": 15.0,
-                    "inclination": 5.0,
-                    "habitable_zone": false,
-                    "radius": 1.2,
-                    "angular_separation": 30,
-                    "texture": null
-                }
-            ]
-        },
-        {
-            "name": "K2-120",
-            "sy_dist": 60.0,
-            "ra": 90.0,
-            "dec": -10.0,
-            "st_teff": 6100,
-            "st_lum": 1.3,
-            "distance_from_center": 150,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "K2-120b",
-                    "semi_major_axis": 0.05,
-                    "eccentricity": 0.03,
-                    "orbital_period": 7.0,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.6,
-                    "angular_separation": 0,
-                    "texture": "Venus.png"
-                }
-            ]
-        },
-        {
-            "name": "K2-161",
-            "sy_dist": 50.0,
-            "ra": 30.0,
-            "dec": 20.0,
-            "st_teff": 4700,
-            "st_lum": 0.4,
-            "distance_from_center": 100,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "K2-161c",
-                    "semi_major_axis": 0.2,
-                    "eccentricity": 0.05,
-                    "orbital_period": 30.0,
-                    "inclination": 10.0,
-                    "habitable_zone": true,
-                    "radius": 1.5,
-                    "angular_separation": 0,
-                    "texture": "Earth.png"
-                }
-            ]
-        },
-        {
-            "name": "LHS 1140",
-            "sy_dist": 70.0,
-            "ra": 120.0,
-            "dec": 10.0,
-            "st_teff": 3200,
-            "st_lum": 0.02,
-            "distance_from_center": 100,
-            "rotation_speed": 0.02,
-            "planets": [
-                {
-                    "name": "LHS 1140b",
-                    "semi_major_axis": 0.1,
-                    "eccentricity": 0.01,
-                    "orbital_period": 5.0,
-                    "inclination": 0.0,
-                    "habitable_zone": true,
-                    "radius": 1.4,
-                    "angular_separation": 0,
-                    "texture": "Earth.png"
-                }
-            ]
-        },
-        {
-            "name": "WASP-39",
-            "sy_dist": 80.0,
-            "ra": 180.0,
-            "dec": 10.0,
-            "st_teff": 5800,
-            "st_lum": 1.0,
-            "distance_from_center": 150,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "WASP-39b",
-                    "semi_major_axis": 0.04,
-                    "eccentricity": 0.1,
-                    "orbital_period": 6.0,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.3,
-                    "angular_separation": 0,
-                    "texture": "Jupiter.png"
-                }
-            ]
-        },
-        {
-            "name": "HD 209458",
-            "sy_dist": 90.0,
-            "ra": 240.0,
-            "dec": -5.0,
-            "st_teff": 6000,
-            "st_lum": 1.5,
-            "distance_from_center": 150,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "HD 209458b",
-                    "semi_major_axis": 0.045,
-                    "eccentricity": 0.02,
-                    "orbital_period": 3.5,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.1,
-                    "angular_separation": 0,
-                    "texture": "Jupiter.png"
-                }
-            ]
-        },
-        {
-            "name": "WASP-107",
-            "sy_dist": 70.0,
-            "ra": 250.0,
-            "dec": 15.0,
-            "st_teff": 5900,
-            "st_lum": 1.2,
-            "distance_from_center": 100,
-            "rotation_speed": 0.02,
-            "planets": [
-                {
-                    "name": "WASP-107b",
-                    "semi_major_axis": 0.047,
-                    "eccentricity": 0.01,
-                    "orbital_period": 6.0,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 0.9,
-                    "angular_separation": 0,
-                    "texture": "Jupiter.png"
-                }
-            ]
-        },
-        {
-            "name": "GJ 357",
-            "sy_dist": 60.0,
-            "ra": 300.0,
-            "dec": 10.0,
-            "st_teff": 3600,
-            "st_lum": 0.1,
-            "distance_from_center": 150,
-            "rotation_speed": 0.01,
-            "planets": [
-                {
-                    "name": "GJ 357b",
-                    "semi_major_axis": 0.05,
-                    "eccentricity": 0.04,
-                    "orbital_period": 6.0,
-                    "inclination": 0.0,
-                    "habitable_zone": false,
-                    "radius": 1.4,
-                    "angular_separation": 0,
-                    "texture": "Venus.png"
-                }
-            ]
-        }
+      {
+        "name": "Kepler-186",
+        "sy_dist": 30.0,
+        "ra": 95.0,
+        "dec": 5.0,
+        "st_teff": 5000,
+        "st_lum": 0.5,
+        "distance_from_center": 120,
+        "rotation_speed": 0.02,
+        "planets": [
+          {
+            "name": "Kepler-186f",
+            "semi_major_axis": 1.1,
+            "eccentricity": 0.01,
+            "orbital_period": 365.0,
+            "inclination": 0.0,
+            "habitable_zone": true,
+            "radius": 0.9,
+            "angular_separation": 0,
+            "texture": "Earth.png"
+          },
+          {
+            "name": "Kepler-186c",
+            "semi_major_axis": 1.5,
+            "eccentricity": 0.1,
+            "orbital_period": 500.0,
+            "inclination": 10.0,
+            "habitable_zone": false,
+            "radius": 0.7,
+            "angular_separation": 30,
+            "texture": null
+          }
+        ]
+      },
+      {
+        "name": "TRAPPIST-1",
+        "sy_dist": 25.0,
+        "ra": 115.0,
+        "dec": -5.0,
+        "st_teff": 2700,
+        "st_lum": 0.08,
+        "distance_from_center": 95,
+        "rotation_speed": 0.006,
+        "planets": [
+          {
+            "name": "TRAPPIST-1e",
+            "semi_major_axis": 0.03,
+            "eccentricity": 0.02,
+            "orbital_period": 6.1,
+            "inclination": 15.0,
+            "habitable_zone": true,
+            "radius": 0.9,
+            "angular_separation": 0,
+            "texture": "Mars.png"
+          },
+          {
+            "name": "TRAPPIST-1d",
+            "semi_major_axis": 0.05,
+            "eccentricity": 0.02,
+            "orbital_period": 13.0,
+            "inclination": 8.0,
+            "habitable_zone": true,
+            "radius": 0.76,
+            "angular_separation": 40,
+            "texture": null
+          }
+        ]
+      },
+      {
+        "name": "Proxima Centauri",
+        "sy_dist": 22.0,
+        "ra": 205.0,
+        "dec": -15.0,
+        "st_teff": 3100,
+        "st_lum": 0.0015,
+        "distance_from_center": 110,
+        "rotation_speed": 0.007,
+        "planets": [
+          {
+            "name": "Proxima b",
+            "semi_major_axis": 0.05,
+            "eccentricity": 0.03,
+            "orbital_period": 11.2,
+            "inclination": 10.0,
+            "habitable_zone": true,
+            "radius": 1.3,
+            "angular_separation": 0,
+            "texture": "Venus.png"
+          },
+          {
+            "name": "Proxima c",
+            "semi_major_axis": 0.12,
+            "eccentricity": 0.01,
+            "orbital_period": 5.2,
+            "inclination": 20.0,
+            "habitable_zone": false,
+            "radius": 1.0,
+            "angular_separation": 35,
+            "texture": null
+          }
+        ]
+      },
+      {
+        "name": "Alpha Centauri A",
+        "sy_dist": 30.0,
+        "ra": 400.0,
+        "dec": -60.0,
+        "st_teff": 5700,
+        "st_lum": 1.5,
+        "distance_from_center": 130,
+        "rotation_speed": 0.008,
+        "planets": [
+          {
+            "name": "Alpha Centauri Ab",
+            "semi_major_axis": 0.03,
+            "eccentricity": 0.02,
+            "orbital_period": 3.2,
+            "inclination": 15.0,
+            "habitable_zone": true,
+            "radius": 1.2,
+            "angular_separation": 0,
+            "texture": "Earth.png"
+          },
+          {
+            "name": "Alpha Centauri Bb",
+            "semi_major_axis": 0.05,
+            "eccentricity": 0.01,
+            "orbital_period": 9.0,
+            "inclination": 12.0,
+            "habitable_zone": false,
+            "radius": 0.8,
+            "angular_separation": 25,
+            "texture": null
+          }
+        ]
+      },
+      {
+        "name": "Beta Pictoris",
+        "sy_dist": 228.0,
+        "ra": 1149.0,
+        "dec": -60.0,
+        "st_teff": 8200,
+        "st_lum": 5.0,
+        "distance_from_center": 140,
+        "rotation_speed": 0.009,
+        "planets": [
+          {
+            "name": "Beta Pictoris b",
+            "semi_major_axis": 0.08,
+            "eccentricity": 0.02,
+            "orbital_period": 8.0,
+            "inclination": 5.0,
+            "habitable_zone": false,
+            "radius": 1.5,
+            "angular_separation": 0,
+            "texture": "Mars.png"
+          },
+          {
+            "name": "Beta Pictoris c",
+            "semi_major_axis": 0.15,
+            "eccentricity": 0.03,
+            "orbital_period": 20.0,
+            "inclination": 18.0,
+            "habitable_zone": false,
+            "radius": 0.7,
+            "angular_separation": 40,
+            "texture": null
+          }
+        ]
+      },
+      {
+        "name": "HD 189733",
+        "sy_dist": 635.0,
+        "ra": 140.0,
+        "dec": 43.0,
+        "st_teff": 5000,
+        "st_lum": 1.0,
+        "distance_from_center": 160,
+        "rotation_speed": 0.01,
+        "planets": [
+          {
+            "name": "HD 189733 b",
+            "semi_major_axis": 0.03,
+            "eccentricity": 0.01,
+            "orbital_period": 2.2,
+            "inclination": 20.0,
+            "habitable_zone": false,
+            "radius": 1.0,
+            "angular_separation": 0,
+            "texture": "Earth.png"
+          },
+          {
+            "name": "HD 189733 c",
+            "semi_major_axis": 0.1,
+            "eccentricity": 0.04,
+            "orbital_period": 15.0,
+            "inclination": 10.0,
+            "habitable_zone": false,
+            "radius": 0.6,
+            "angular_separation": 30,
+            "texture": null
+          }
+        ]
+      },
+      {
+        "name": "Gliese 581",
+        "sy_dist": 450.0,
+        "ra": 220.0,
+        "dec": 30.0,
+        "st_teff": 4000,
+        "st_lum": 0.3,
+        "distance_from_center": 100,
+        "rotation_speed": 0.004,
+        "planets": [
+          {
+            "name": "Gliese 581g",
+            "semi_major_axis": 0.22,
+            "eccentricity": 0.1,
+            "orbital_period": 37.0,
+            "inclination": 5.0,
+            "habitable_zone": true,
+            "radius": 4.0,
+            "angular_separation": 0,
+            "texture": "Earth.png"
+          },
+          {
+            "name": "Gliese 581d",
+            "semi_major_axis": 15,
+            "eccentricity": 0.05,
+            "orbital_period": 66.0,
+            "inclination": 8.0,
+            "habitable_zone": false,
+            "radius": 1.5,
+            "angular_separation": 40,
+            "texture": null
+          }
+        ]
+      },
+      {
+        "name": "Kepler-22",
+        "sy_dist": 40.0,
+        "ra": 195.0,
+        "dec": 20.0,
+        "st_teff": 5500,
+        "st_lum": 1.2,
+        "distance_from_center": 115,
+        "rotation_speed": 0.006,
+        "planets": [
+          {
+            "name": "Kepler-22b",
+            "semi_major_axis": 5,
+            "eccentricity": 0.03,
+            "orbital_period": 290.0,
+            "inclination": 10.0,
+            "habitable_zone": true,
+            "radius": 2.4,
+            "angular_separation": 0,
+            "texture": "Mars.png"
+          },
+          {
+            "name": "Kepler-22c",
+            "semi_major_axis": 8.0,
+            "eccentricity": 0.02,
+            "orbital_period": 500.0,
+            "inclination": 12.0,
+            "habitable_zone": false,
+            "radius": 1.5,
+            "angular_separation": 35,
+            "texture": null
+          }
+        ]
+      }
     ]
-}
+  }
+  

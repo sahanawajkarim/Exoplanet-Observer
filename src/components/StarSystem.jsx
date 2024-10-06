@@ -90,7 +90,7 @@ const StarSystem = () => {
 
     const createStar = (star) => {
       const starColor = temperatureToColor(star.st_teff);
-      const starGeometry = new THREE.SphereGeometry(5, 16, 16); // Increase size by 2.5 times
+      const starGeometry = new THREE.SphereGeometry(2, 16, 16);
       const starMaterial = new THREE.MeshStandardMaterial({
         color: starColor,
         emissive: starColor,
@@ -103,7 +103,7 @@ const StarSystem = () => {
 
       const ra = THREE.MathUtils.degToRad(star.ra);
       const dec = THREE.MathUtils.degToRad(star.dec);
-      const dist = star.sy_dist * 5; // Increase distance by 5 times
+      const dist = star.sy_dist;
 
       const x = dist * Math.cos(dec) * Math.cos(ra);
       const y = dist * Math.cos(dec) * Math.sin(ra);
@@ -119,7 +119,7 @@ const StarSystem = () => {
       let angle = 0;
       const animateStar = () => {
         angle += star.rotation_speed;
-        const starDistance = star.distance_from_center * 5; // Increase distance by 5 times
+        const starDistance = star.distance_from_center;
         const x = starDistance * Math.cos(angle);
         const z = starDistance * Math.sin(angle);
         starMesh.position.set(x, starMesh.position.y, z);
@@ -138,7 +138,7 @@ const StarSystem = () => {
       const { semi_major_axis, habitable_zone, radius, orbital_period, inclination, angular_separation, texture } = planet;
       const color = habitable_zone ? 0xffff00 : 0x00ff00;
 
-      const geometry = new THREE.SphereGeometry(radius * 2.5, 16, 16); // Increase size by 2.5 times
+      const geometry = new THREE.SphereGeometry(radius, 16, 16);
       let material;
 
       if (texture) {
@@ -157,7 +157,7 @@ const StarSystem = () => {
       }
 
       const planetMesh = new THREE.Mesh(geometry, material);
-      const planetDistance = semi_major_axis * 10 * 5; // Increase distance by 5 times
+      const planetDistance = semi_major_axis * 10;
       const baseAngle = THREE.MathUtils.degToRad(angular_separation);
       const x = planetDistance * Math.cos(baseAngle);
       const z = planetDistance * Math.sin(baseAngle);
@@ -168,16 +168,11 @@ const StarSystem = () => {
         z
       );
 
-      // Draw dotted orbit with inclination
+      // Draw dotted orbit
       const orbitGeometry = new THREE.RingGeometry(planetDistance, planetDistance + 0.05, 32);
       const orbitMaterial = new THREE.LineDashedMaterial({ color: 0xffffff, dashSize: 0.1, gapSize: 0.05 });
       const orbitLine = new THREE.Line(orbitGeometry, orbitMaterial);
       orbitLine.rotation.x = Math.PI / 2; // Make the orbit flat
-      orbitLine.rotation.z = THREE.MathUtils.degToRad(inclination); // Apply inclination to the orbit
-
-      // Offset the orbit line so it does not intersect with the planet
-      orbitLine.position.y = (planetDistance * Math.sin(THREE.MathUtils.degToRad(inclination))) + 0.5;
-
       starMesh.add(orbitLine); // Add the orbit to the star mesh
 
       starMesh.add(planetMesh);

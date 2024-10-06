@@ -10,12 +10,14 @@ const StarSystem = () => {
   const mountRef = useRef(null);
   const cameraRef = useRef(null);
   const controlsRef = useRef(null);
+  const sceneRef = useRef(null); // Use a ref to store the scene
   const [planets, setPlanets] = useState([]);
   const [selectedPlanet, setSelectedPlanet] = useState(null); // State to track selected planet
   const [marker, setMarker] = useState(null); // State to track the circle marker
 
   useEffect(() => {
     const scene = new THREE.Scene();
+    sceneRef.current = scene; // Store the scene in the ref
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
     camera.position.set(0, 200, 500);
     cameraRef.current = camera;
@@ -141,7 +143,6 @@ const StarSystem = () => {
     };
 
     starData.starSystems.forEach(createStar);
-
     setPlanets(planetMeshes); // Store all planet meshes in state for zooming
 
     const animateScene = () => {
@@ -192,6 +193,7 @@ const StarSystem = () => {
   };
 
   const createMarker = (position) => {
+    const scene = sceneRef.current; // Access the scene from ref
     // Remove existing marker if it exists
     if (marker) {
       marker.geometry.dispose();
@@ -205,7 +207,6 @@ const StarSystem = () => {
     const circle = new THREE.Mesh(geometry, material);
     circle.position.copy(position);
     circle.rotation.x = Math.PI / 2; // Rotate to face upwards
-    circle.layers.set(1); // Set a different layer for marker visibility
 
     scene.add(circle);
     setMarker(circle); // Store marker in state

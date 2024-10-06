@@ -8,7 +8,7 @@ const PlanetLabel = ({ position, name }) => {
       style={{
         position: 'absolute',
         left: `${position.x}px`,
-        top: `${position.y}px`,
+        top: `${position.y+10}px`,
       }}
     >
       {name}

@@ -60,7 +60,8 @@ const TelescopeVisualizer = ({ starData, onPlanetSelect }) => {
         if (selectedPlanet.texture_url) {
           const textureLoader = new THREE.TextureLoader();
           textureLoader.load(selectedPlanet.texture_url, (texture) => {
-            const material = new THREE.MeshBasicMaterial({ map: texture });
+            // Create material using the loaded texture
+            const material = new THREE.MeshStandardMaterial({ map: texture }); // Use MeshStandardMaterial for better lighting
             const planetMesh = new THREE.Mesh(geometry, material);
             scene.add(planetMesh);
           }, undefined, (error) => {

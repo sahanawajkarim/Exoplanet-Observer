@@ -1,15 +1,18 @@
 .App {
-    display: flex;
-    height: 100vh;
-  }
-  
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
   .sidebar {
     width: 200px;
     background-color: rgba(244, 244, 244, 0); /* Adjust the alpha value for transparency */
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+
   }
   
   .sidebar button {
@@ -26,10 +29,117 @@
   
   .content {
     flex-grow: 1;
-    padding: 20px;
+    width: 100vh ;
+    overflow:hidden;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
   }
   
   #star-system-container {
     flex-grow: 1;
     position: relative;
   }
+
+  /* styles.css */
+
+.filter-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+.info-panel {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 10;
+}
+.html {
+  display: flex;
+  flex-direction: column;
+  width: 100vh;
+  height: 100vh;
+}
+
+body {
+  margin: 0px;
+}
+
+/* src/App.css or global styles */
+.hamburger {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  width: 30px;
+  height: 20px;
+  z-index: 1000;
+}
+
+.hamburger div {
+  background: white;
+  height: 3px;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
+
+.toggle-button {
+  position: absolute;
+  z-index: 2; /* Make sure it appears above other elements */
+  margin: 10px;
+  background: #333; /* Background color */
+  color: white; /* Text color */
+  border: none; /* Remove default button border */
+  padding: 10px; /* Padding for button */
+  cursor: pointer; /* Pointer cursor */
+}
+
+.sidebar {
+  position: fixed; /* Change to fixed */
+  left: -200px; /* Hide off-screen */
+  top: 0;
+  width: 200px;
+  height: 100%; /* Full height */
+  background-color: #333;
+  color: white;
+  transition: left 0.3s ease;
+  z-index: 1; /* Layer it below the button */
+  padding: 0px;
+}
+
+.sidebar.visible {
+  left: 0; /* Slide in */
+}
+
+.sidebar button {
+  display: block;
+  background: none;
+  border: none;
+  color: white;
+
+  cursor: pointer;
+  width: 100%; /* Full width buttons */
+}
+
+.sidebar button:hover {
+  background-color: #555; /* Hover effect */
+}
+
+.main {
+  margin-left: 0; /* No margin needed when sidebar is hidden */
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar-visible .main {
+  margin-left: 0px; /* Leave space for the sidebar when visible */
+}

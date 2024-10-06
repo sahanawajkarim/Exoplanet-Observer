@@ -1,0 +1,42 @@
+.telescope-visualizer {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: move;
+  }
+  
+  .telescope-visualizer h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.5em;
+  }
+  
+  .telescope-visualizer label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .telescope-visualizer select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+  
+  .planet-details {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+  }
+  
+  .planet-details h3 {
+    margin-top: 0;
+  }
+  

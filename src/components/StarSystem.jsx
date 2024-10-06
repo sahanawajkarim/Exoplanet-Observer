@@ -1,272 +1,247 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import starData from '../data/exoplanets.json'; // Your updated JSON data
-import Modal from './Modal'; // Import the Modal component
-import LagrangeSelector from './LagrangeSelector'; // Import the Lagrange Selector
+import starData from '../data/exoplanets.json';
+import ExoplanetVisualizer from './ExoplanetVisualizer';
+import TelescopeVisualizer from './TelescopeVisualizer';
+import PlanetLabel from './PlanetLabel'; // Import the PlanetLabel component
 
 const StarSystem = () => {
   const mountRef = useRef(null);
-  const [selectedObject, setSelectedObject] = useState(null); // State for selected planet or star
-  const cameraRef = useRef(null); // Ref for the camera
-
-  // Define the maximum planet size relative to the Sun's size
-  const SUN_RADIUS = 10; // Fixed size for the Sun
-  const MAX_PLANET_RADIUS = SUN_RADIUS / 10; // Maximum planet size
+  const cameraRef = useRef(null);
+  const controlsRef = useRef(null);
+  const [planets, setPlanets] = useState([]);
+  const [selectedPlanet, setSelectedPlanet] = useState(null); // State to track selected planet
+  const [marker, setMarker] = useState(null); // State to track the circle marker
 
   useEffect(() => {
-    // Set up the scene, camera, and renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
-    camera.position.set(100, 100, 500);
-    cameraRef.current = camera; // Store camera in ref
+    camera.position.set(0, 200, 500);
+    cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     mountRef.current.appendChild(renderer.domElement);
 
-    // Add OrbitControls for camera movement
     const controls = new OrbitControls(camera, renderer.domElement);
-
-    // Add a light source (for star brightness)
+    controlsRef.current = controls;
     const light = new THREE.PointLight(0xffffff, 1, 0);
-    light.position.set(0, 0, 0); // Light from the Sun
+    light.position.set(0, 0, 0);
     scene.add(light);
 
-    // Create the Sun at the center with a fixed size
-    const sunGeometry = new THREE.SphereGeometry(SUN_RADIUS, 32, 32); // Sun fixed size
-    const sunMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 }); // Yellow Sun
-    const sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
-    scene.add(sunMesh);
+    const globalOrigin = new THREE.Object3D();
+    scene.add(globalOrigin);
 
-    // Array to hold planet objects for animation
-    const planets = [];
+    const planetMeshes = [];
 
-    // Function to create stars and their planets
+    const temperatureToColor = (temperature) => {
+      let r, g, b;
+      if (temperature < 1000) {
+        r = 255; 
+        g = 0;
+        b = 0;
+      } else if (temperature < 4000) {
+        r = 255;
+        g = Math.round(255 * (temperature / 4000));
+        b = 0;
+      } else if (temperature < 6000) {
+        r = Math.round(255 * (6000 - temperature) / 2000);
+        g = 255;
+        b = 0;
+      } else {
+        r = 0;
+        g = Math.round(255 * (temperature - 6000) / 4000);
+        b = 255;
+      }
+      return new THREE.Color(r / 255, g / 255, b / 255);
+    };
+
     const createStar = (star) => {
-      const geometry = new THREE.SphereGeometry(2, 16, 16); // Adjust size based on luminosity
-      const material = new THREE.MeshBasicMaterial({ color: 0xffffff }); // White for stars
+      const geometry = new THREE.SphereGeometry(2, 16, 16);
+      const material = new THREE.MeshBasicMaterial({ color: temperatureToColor(star.st_teff) });
       const starMesh = new THREE.Mesh(geometry, material);
 
-      // Convert RA, Dec, and distance to Cartesian coordinates
-      const ra = THREE.MathUtils.degToRad(star.ra); // Right Ascension in radians
-      const dec = THREE.MathUtils.degToRad(star.dec); // Declination in radians
-      const dist = star.sy_dist * 10; // Adjust scale factor if needed (e.g., to fit the scene)
+      const ra = THREE.MathUtils.degToRad(star.ra);
+      const dec = THREE.MathUtils.degToRad(star.dec);
+      const dist = star.sy_dist;
 
-      // Calculate the star's position in 3D space
-      starMesh.position.set(
-        dist * Math.cos(dec) * Math.cos(ra), // x
-        dist * Math.cos(dec) * Math.sin(ra), // y
-        dist * Math.sin(dec) // z
-      );
+      const x = dist * Math.cos(dec) * Math.cos(ra);
+      const y = dist * Math.cos(dec) * Math.sin(ra);
+      const z = dist * Math.sin(dec);
 
-      scene.add(starMesh);
+      starMesh.position.set(x, y, z);
+      globalOrigin.add(starMesh);
 
-      // Store star data in userData
-      starMesh.userData = star; // Store star data
-
-      // Add click event to the star
-      starMesh.callback = () => handleClick(star); // Show modal with star data on click
-
-      // Event listener for click
-      renderer.domElement.addEventListener('click', (event) => {
-        // Calculate mouse position in normalized device coordinates
-        const mouse = new THREE.Vector2();
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-        // Create a Raycaster
-        const raycaster = new THREE.Raycaster();
-        raycaster.setFromCamera(mouse, camera);
-
-        // Check for intersection with stars
-        const intersects = raycaster.intersectObjects(scene.children.filter(child => child instanceof THREE.Mesh));
-        if (intersects.length > 0 && intersects[0].object.userData.st_spectype) {
-          const clickedStar = intersects[0].object.userData; // Get the star data
-          handleClick(clickedStar); // Show the modal with star data
-        }
-      });
-
-      // Optional: Create orbits for planets if needed
       if (star.planets) {
-        star.planets.forEach(planet => {
-          createOrbit(starMesh.position, planet);
-          createPlanet(starMesh.position, planet);
-        });
-      }
-    };
-
-    // Function to create a dotted orbit for each planet
-    const createOrbit = (starPosition, planet) => {
-      const orbitRadius = planet.semi_major_axis * 100; // Scale semi-major axis for visualization
-
-      // Convert inclination from degrees to radians
-      const inclination = THREE.MathUtils.degToRad(planet.inclination || 0);
-
-      // Create orbit points
-      const orbitPoints = [];
-      for (let i = 0; i < 100; i++) {
-        const angle = (i / 100) * 2 * Math.PI; // Angle for the orbit
-        const x = starPosition.x + orbitRadius * Math.cos(angle); // X position
-        const y = starPosition.y + orbitRadius * Math.sin(angle) * Math.cos(inclination); // Y position
-        const z = orbitRadius * Math.sin(inclination); // Z position based on inclination
-
-        orbitPoints.push(new THREE.Vector3(x, y, z));
+        star.planets.forEach((planet) => createPlanet(planet, starMesh));
       }
 
-      const geometry = new THREE.BufferGeometry().setFromPoints(orbitPoints);
+      let angle = 0;
+      const animateStar = () => {
+        angle += star.rotation_speed;
+        const starDistance = star.distance_from_center;
+        const x = starDistance * Math.cos(angle);
+        const z = starDistance * Math.sin(angle);
+        starMesh.position.set(x, starMesh.position.y, z);
+      };
 
-      const material = new THREE.LineDashedMaterial({
-        color: 0xffffff,
-        dashSize: 3,
-        gapSize: 1,
-        linewidth: 2,
-      });
-
-      const orbit = new THREE.Line(geometry, material);
-      orbit.computeLineDistances(); // Required for dashed lines
-      scene.add(orbit);
+      const animate = () => {
+        requestAnimationFrame(animate);
+        animateStar();
+      };
+      animate();
     };
 
-    // Function to create a planet
-    const createPlanet = (starPosition, planetData) => {
-      // Ensure the planet's radius does not exceed the maximum size
-      const planetRadius = Math.min(planetData.radius || 1, MAX_PLANET_RADIUS); // Use planet data or default to 1, capped by max size
+    const createPlanet = (planet, starMesh) => {
+      const { semi_major_axis, habitable_zone, radius, orbital_period, inclination, angular_separation, texture_url } = planet;
+      const color = habitable_zone ? 0xffff00 : 0x00ff00;
+      const geometry = new THREE.SphereGeometry(radius, 16, 16);
+      const material = texture_url 
+        ? new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load(texture_url) }) // Load texture
+        : new THREE.MeshBasicMaterial({ color }); // Use solid color if no texture
 
-      const planetGeometry = new THREE.SphereGeometry(planetRadius, 16, 16); // Small planet scaled by its radius
-      const planetMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Green for planets
-      const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
+      const planetMesh = new THREE.Mesh(geometry, material);
 
-      // Set initial position
-      const orbitRadius = planetData.semi_major_axis * 100;
-      const eccentricity = planetData.eccentricity || 0;
+      const planetDistance = semi_major_axis * 10;
+      const baseAngle = THREE.MathUtils.degToRad(angular_separation);
+      const x = planetDistance * Math.cos(baseAngle);
+      const z = planetDistance * Math.sin(baseAngle);
+
       planetMesh.position.set(
-        starPosition.x + orbitRadius * (1 + eccentricity),
-        starPosition.y,
-        starPosition.z
+        x,
+        planetDistance * Math.sin(THREE.MathUtils.degToRad(inclination)),
+        z
       );
 
-      // Add click event to the planet
-      planetMesh.userData = planetData; // Store planet data in userData
-      planetMesh.callback = () => handleClick(planetData); // Show modal with planet data on click
-      scene.add(planetMesh);
-      planets.push({ planetMesh, planetData, starPosition });
+      starMesh.add(planetMesh);
 
-      // Add event listener for click
-      renderer.domElement.addEventListener('click', (event) => {
-        // Calculate mouse position in normalized device coordinates
-        const mouse = new THREE.Vector2();
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      planetMeshes.push({ planet, starMesh, mesh: planetMesh }); // Store planet mesh for zooming
 
-        // Create a Raycaster
-        const raycaster = new THREE.Raycaster();
-        raycaster.setFromCamera(mouse, camera);
+      const angularSpeed = (2 * Math.PI) / (orbital_period * 60 * 60 * 24);
+      let angle = baseAngle;
 
-        // Check for intersection with planets
-        const intersects = raycaster.intersectObjects(planets.map(p => p.planetMesh));
-        if (intersects.length > 0) {
-          const clickedPlanet = intersects[0].object.userData; // Get the planet data
-          handleClick(clickedPlanet); // Show the modal with planet data
-        }
-      });
-    };
+      const animatePlanet = () => {
+        angle += angularSpeed;
+        const x = planetDistance * Math.cos(angle);
+        const z = planetDistance * Math.sin(angle);
 
-    // Function to handle clicks on planets and stars
-    const handleClick = (object) => {
-      setSelectedObject(object); // Show the modal with object data
-      zoomToObject(object); // Zoom to the clicked object
-    };
-
-    // Function to zoom to the clicked object
-    const zoomToObject = (object) => {
-      const targetPosition = new THREE.Vector3().copy(object.position);
-      const distance = camera.position.distanceTo(targetPosition);
-      const zoomFactor = 2; // Adjust zoom factor as needed
-      const newCameraPosition = targetPosition.clone().add(new THREE.Vector3(0, 0, distance / zoomFactor));
-
-      // Animate camera movement to the new position
-      const duration = 1; // Duration of zoom animation in seconds
-      const startPosition = camera.position.clone();
-      const startTime = Date.now();
-
-      const animateZoom = () => {
-        const elapsed = (Date.now() - startTime) / 1000; // Time in seconds
-        const t = Math.min(elapsed / duration, 1); // Normalize to [0, 1]
-
-        // Lerp the camera position
-        camera.position.lerpVectors(startPosition, newCameraPosition, t);
-        camera.lookAt(targetPosition); // Keep looking at the target position
-
-        // Continue animation if not yet done
-        if (t < 1) {
-          requestAnimationFrame(animateZoom);
-        }
+        planetMesh.position.set(
+          x,
+          planetDistance * Math.sin(THREE.MathUtils.degToRad(inclination)),
+          z
+        );
       };
-      animateZoom();
+
+      const animate = () => {
+        requestAnimationFrame(animate);
+        animatePlanet();
+      };
+      animate();
     };
 
-    // Loop through star systems and create stars and orbits
     starData.starSystems.forEach(createStar);
 
-    // Animation loop to move planets
-    const animate = () => {
-      requestAnimationFrame(animate);
+    setPlanets(planetMeshes); // Store all planet meshes in state for zooming
+
+    const animateScene = () => {
+      requestAnimationFrame(animateScene);
       controls.update();
-
-      // Animate each planet
-      const time = Date.now() * 0.0001; // Speed factor for animation
-
-      planets.forEach(({ planetMesh, planetData, starPosition }) => {
-        const orbitalPeriod = planetData.orbital_period || 365; // Default to 365 days if not provided
-        const angle = (time / orbitalPeriod) * 2 * Math.PI; // Calculate angle based on time and orbital period
-
-        // Semi-major and semi-minor axes
-        const semiMajorAxis = planetData.semi_major_axis * 100;
-        const semiMinorAxis = semiMajorAxis * (1 - planetData.eccentricity);
-
-        // Parametric equation of the ellipse
-        const x = starPosition.x + semiMajorAxis * Math.cos(angle);
-        const y = starPosition.y + semiMinorAxis * Math.sin(angle) * Math.cos(THREE.MathUtils.degToRad(planetData.inclination));
-        const z = semiMajorAxis * Math.sin(THREE.MathUtils.degToRad(planetData.inclination)); // Adjusted for inclination
-
-        planetMesh.position.set(x, y, z);
-      });
-
       renderer.render(scene, camera);
     };
-    animate();
+    animateScene();
 
-    // Clean up on component unmount
     return () => {
       mountRef.current.removeChild(renderer.domElement);
       renderer.dispose();
     };
   }, []);
 
-  // Function to close the modal
-  const closeModal = () => {
-    setSelectedObject(null);
-    // Optionally reset the camera position to the initial state
-    const camera = cameraRef.current;
-    camera.position.set(100, 100, 500); // Reset camera position
-    camera.lookAt(0, 0, 0); // Reset camera direction
+  const zoomToPlanet = (planetName) => {
+    const selectedPlanet = planets.find((p) => p.planet.name === planetName);
+
+    if (selectedPlanet) {
+      const { mesh } = selectedPlanet;
+      const targetPosition = new THREE.Vector3().copy(mesh.position).add(new THREE.Vector3(50, 50, 50));
+
+      const currentPos = cameraRef.current.position.clone();
+      const targetPos = targetPosition.clone();
+      let progress = 0;
+      const zoomSpeed = 0.02;
+
+      controlsRef.current.enabled = false; // Disable controls during zoom
+
+      const smoothZoom = () => {
+        if (progress < 1) {
+          progress += zoomSpeed;
+          cameraRef.current.position.lerpVectors(currentPos, targetPos, progress);
+          cameraRef.current.lookAt(mesh.position);
+          requestAnimationFrame(smoothZoom);
+        } else {
+          cameraRef.current.lookAt(mesh.position);
+          controlsRef.current.enabled = true; // Re-enable controls after zoom completes
+        }
+      };
+
+      smoothZoom();
+      setSelectedPlanet(selectedPlanet); // Set the currently selected planet
+
+      // Create a circular marker on the selected planet
+      createMarker(mesh.position);
+    }
   };
 
-  // Function to handle Lagrange Point selection
-  const handleLagrangePointSelect = (position) => {
-    // Animate the camera to the Lagrange point
-    const targetPosition = new THREE.Vector3(...position);
-    cameraRef.current.position.copy(targetPosition).add(new THREE.Vector3(0, 0, 50)); // Offset for a better view
-    cameraRef.current.lookAt(targetPosition);
+  const createMarker = (position) => {
+    // Remove existing marker if it exists
+    if (marker) {
+      marker.geometry.dispose();
+      marker.material.dispose();
+      marker.parent.remove(marker);
+    }
+
+    // Create a circular marker (ring)
+    const geometry = new THREE.CircleGeometry(0.2, 32); // Adjust radius as needed
+    const material = new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide }); // Red color
+    const circle = new THREE.Mesh(geometry, material);
+    circle.position.copy(position);
+    circle.rotation.x = Math.PI / 2; // Rotate to face upwards
+    circle.layers.set(1); // Set a different layer for marker visibility
+
+    scene.add(circle);
+    setMarker(circle); // Store marker in state
+  };
+
+  const resetCamera = () => {
+    cameraRef.current.position.set(0, 200, 500); // Reset to default position
+    cameraRef.current.lookAt(new THREE.Vector3(0, 0, 0)); // Look at the origin
+    controlsRef.current.update();
+    setSelectedPlanet(null); // Reset the selected planet when camera is reset
+    if (marker) {
+      marker.geometry.dispose();
+      marker.material.dispose();
+      marker.parent.remove(marker);
+      setMarker(null); // Clear marker when resetting
+    }
   };
 
   return (
-    <div>
-      <LagrangeSelector onLagrangePointSelect={handleLagrangePointSelect} />
+    <>
       <div ref={mountRef}></div>
-      <Modal planet={selectedObject} onClose={closeModal} /> {/* Render Modal */}
-    </div>
+      <ExoplanetVisualizer starData={starData} onPlanetSelect={zoomToPlanet} />
+      <TelescopeVisualizer starData={starData} onPlanetSelect={zoomToPlanet} />
+
+      {/* Display the planet label if a planet is selected */}
+      {selectedPlanet && (
+        <PlanetLabel 
+          position={selectedPlanet.mesh.position} 
+          name={selectedPlanet.planet.name} 
+        />
+      )}
+
+      <button style={{ position: 'absolute', top: '20px', right: '20px' }} onClick={resetCamera}>
+        Reset Camera
+      </button>
+    </>
   );
 };
 

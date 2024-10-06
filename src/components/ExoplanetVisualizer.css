@@ -1,0 +1,46 @@
+.exoplanet-visualizer {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 250px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow: scroll;
+  }
+  
+  .exoplanet-visualizer h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.5em;
+  }
+  
+  .exoplanet-visualizer label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .results {
+    margin-top: 10px;
+  }
+  
+  .results ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .results li {
+    margin-bottom: 5px;
+    cursor: pointer;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+  
+  .results li:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  

@@ -11,16 +11,16 @@ const ExoplanetVisualizer = ({ starData, onPlanetSelect }) => {
 
   const calculateSNR = () => {
     const results = [];
-    const SNR0 = 100; // Given SNR0 value
+    const SNR0 = 100; 
 
     starData.starSystems.forEach((star) => {
-      const Rstar = star.st_lum; // Luminosity as a proxy for stellar radius
+      const Rstar = star.st_lum; 
       star.planets.forEach((planet) => {
-        const RP = planet.radius; // Planetary radius
-        const PS = planet.semi_major_axis; // Distance from the star
-        const ES = star.sy_dist; // Distance to the system in parsecs
+        const RP = planet.radius; 
+        const PS = planet.semi_major_axis; 
+        const ES = star.sy_dist; 
 
-        // Calculate SNR
+        
         const SNR = SNR0 * Math.pow((Rstar * RP * (diameter / 6)) / ((ES / 10) * PS), 2);
 
         if (SNR > 5) {
@@ -57,7 +57,7 @@ const ExoplanetVisualizer = ({ starData, onPlanetSelect }) => {
             characterizablePlanets.map((item, index) => (
               <li
                 key={index}
-                onClick={() => onPlanetSelect(item.planet.name)} // Trigger zoom to planet when clicked
+                onClick={() => onPlanetSelect(item.planet.name)} 
               >
                 {item.planet.name} orbiting {item.star.name} (SNR: {item.SNR.toFixed(2)}) 
                 - {item.planet.habitable_zone ? "Habitable" : "Not Habitable"}

@@ -29,7 +29,7 @@ const Sidebar = ({ onAction }) => {
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp} // Stop dragging when leaving the sidebar
+      onMouseLeave={handleMouseUp} 
     >
       <h2>Menu</h2>
       <ul>

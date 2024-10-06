@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import * as THREE from 'three';
 import './TelescopeVisualizer.css';
 
@@ -7,6 +7,7 @@ const TelescopeVisualizer = ({ starData, onPlanetSelect }) => {
   const [minTelescopeDiameter, setMinTelescopeDiameter] = useState(null);
   const canvasRef = useRef(null); // Reference for the canvas element
   const sceneRef = useRef(null); // Reference for the Three.js scene
+  const cameraRef = useRef(null); // Reference for the camera
 
   const handlePlanetSelect = (e) => {
     const planetName = e.target.value;
@@ -42,9 +43,18 @@ const TelescopeVisualizer = ({ starData, onPlanetSelect }) => {
     const renderer = new THREE.WebGLRenderer({ canvas });
 
     renderer.setSize(canvas.width, canvas.height);
-    camera.position.set(0, 0, 3); // Set camera distance from planet
+    camera.position.set(0, 0, 3); // Initial camera position
 
     sceneRef.current = scene;
+    cameraRef.current = camera;
+
+    // Add ambient and directional light
+    const ambientLight = new THREE.AmbientLight(0x404040, 1);
+    scene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
 
     const renderPlanet = () => {
       if (selectedPlanet && canvas) {
@@ -57,13 +67,15 @@ const TelescopeVisualizer = ({ starData, onPlanetSelect }) => {
         const geometry = new THREE.SphereGeometry(radius, 32, 32);
 
         // Load texture if available
-        if (selectedPlanet.texture_url) {
+        if (selectedPlanet.texture) {
           const textureLoader = new THREE.TextureLoader();
-          textureLoader.load(selectedPlanet.texture_url, (texture) => {
+          textureLoader.load(`assets/textures/${selectedPlanet.texture}`, (texture) => {
             // Create material using the loaded texture
             const material = new THREE.MeshStandardMaterial({ map: texture }); // Use MeshStandardMaterial for better lighting
             const planetMesh = new THREE.Mesh(geometry, material);
             scene.add(planetMesh);
+            // Zoom into the planet
+            zoomToPlanet(planetMesh.position);
           }, undefined, (error) => {
             console.error('An error occurred while loading the texture:', error);
           });
@@ -72,6 +84,8 @@ const TelescopeVisualizer = ({ starData, onPlanetSelect }) => {
           const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Use a default color, e.g., green
           const planetMesh = new THREE.Mesh(geometry, material);
           scene.add(planetMesh);
+          // Zoom into the planet
+          zoomToPlanet(planetMesh.position);
         }
 
         // Render loop
@@ -97,6 +111,28 @@ const TelescopeVisualizer = ({ starData, onPlanetSelect }) => {
       }
     };
   }, [selectedPlanet]); // Re-run when the selected planet changes
+
+  const zoomToPlanet = (targetPosition) => {
+    const zoomDuration = 1000; // Duration for zooming in milliseconds
+    const startPosition = camera.position.clone();
+    const endPosition = new THREE.Vector3(targetPosition.x, targetPosition.y, targetPosition.z + 2); // Zoom in closer
+
+    const startTime = performance.now();
+
+    const animateZoom = () => {
+      const elapsedTime = performance.now() - startTime;
+      const progress = Math.min(elapsedTime / zoomDuration, 1);
+
+      camera.position.lerpVectors(startPosition, endPosition, progress);
+      camera.lookAt(targetPosition);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateZoom);
+      }
+    };
+
+    animateZoom();
+  };
 
   return (
     <div className="telescope-visualizer">

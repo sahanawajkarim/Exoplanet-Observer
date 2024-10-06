@@ -1,5 +1,5 @@
 import React from 'react';
-import './PlanetLabel.css'; // Import CSS for styling
+import './PlanetLabel.css'; 
 
 const PlanetLabel = ({ position, name }) => {
   return (

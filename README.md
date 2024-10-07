@@ -3,6 +3,8 @@
 **Developed by Team Planet Watchers**  
 *Inspired by NASA and NASA Space Apps Challenge*
 
+https://github.com/user-attachments/assets/edc5cad3-7177-40f4-b331-94706a597afe
+
 
 ## What exactly does it do?
 
@@ -36,11 +38,12 @@
 - **Telescopic Viewpoint Simulation:**  
    Users can visualize what a chosen exoplanet's view would look like, providing an immersive telescopic experience as though observing the universe from that exoplanet.
 
-## What do you hope to achieve?
+## What do we hope to achieve?
 
 Our goal is to foster curiosity and exploration around exoplanetary research and space science. By visualizing exoplanet systems in 3D, we aim to:
 - Support NASA's search for habitable exoplanets.
 - Make complex astronomical data accessible and engaging for the public.
+- Increasing the digital litaracy.
 - Inspire future astronomers, scientists, and space enthusiasts to explore the cosmos.
 
 ## What tools, coding languages, hardware, or software did you use to develop the project?

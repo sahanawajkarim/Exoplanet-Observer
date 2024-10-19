@@ -105,7 +105,7 @@ Exoplanet-Observer/
 
 3. **Run the app:**
    ```bash
-   npm start
+   npm run dev
    ```
 
    The app will be hosted locally on `http://localhost:3000/`.
